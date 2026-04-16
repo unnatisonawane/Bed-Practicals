@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduConnect: The Digital Pedagogy Edition</title>
+    <!-- Use a modern Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Professional Navy Blue and White Color Palette */
+        :root {
+            --navy-blue: #003366;
+            --navy-blue-dark: #002244;
+            --white: #FFFFFF;
+            --light-bg: #F8F9FA;
+            --text-dark: #2C3E50;
+            --text-light: #5A6A7A;
+            --accent-blue: #0055A4;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #E9ECEF;
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 2rem;
+        }
+
+        /* Main Container for the Newsletter */
+        .newsletter-container {
+            max-width: 1050px;
+            margin: 0 auto;
+            background-color: var(--white);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        /* Header Section */
+        header {
+            background: linear-gradient(135deg, var(--navy-blue-dark), var(--navy-blue));
+            color: var(--white);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-bottom: 5px solid var(--accent-blue);
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        /* Two-Column CSS Grid Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2.5rem;
+            padding: 3rem;
+        }
+
+        /* Responsive Breakpoint */
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Shared Typography */
+        h2 {
+            font-size: 1.6rem;
+            color: var(--navy-blue);
+            border-bottom: 3px solid var(--accent-blue);
+            padding-bottom: 0.4rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Left Column Content */
+        .editorial {
+            margin-bottom: 3rem;
+        }
+
+        .editorial p {
+            color: var(--text-light);
+            text-align: justify;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .editorial strong {
+            color: var(--navy-blue);
+        }
+
+        /* Websites List Styling */
+        .websites-list {
+            list-style: none;
+        }
+
+        .websites-list li {
+            background-color: var(--light-bg);
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 5px solid var(--accent-blue);
+            border-radius: 0 6px 6px 0;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .websites-list li:hover {
+            transform: translateX(8px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            background-color: #F0F4F8;
+        }
+
+        .websites-list h3 {
+            font-size: 1.15rem;
+            color: var(--navy-blue);
+            margin-bottom: 0.4rem;
+        }
+
+        .websites-list h3 a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .websites-list h3 a:hover {
+            color: var(--accent-blue);
+            text-decoration: underline;
+        }
+
+        .websites-list p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+
+        /* Right Column (Sidebar) Styling */
+        .sidebar {
+            background-color: var(--navy-blue);
+            color: var(--white);
+            padding: 2.5rem 2rem;
+            border-radius: 10px;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
+            height: fit-content;
+        }
+
+        .sidebar h2 {
+            color: var(--white);
+            border-bottom-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .tip-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 1.2rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--white);
+            transition: background-color 0.3s;
+        }
+
+        .tip-card:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .tip-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tip-card p {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--light-bg);
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.95rem;
+            color: var(--text-light);
+            border-top: 1px solid #DFDFDF;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="newsletter-container">
+
+        <!-- Header Section -->
+        <header>
+            <h1>EduConnect</h1>
+            <p>The Digital Pedagogy Edition</p>
+        </header>
+
+        <!-- Main Body: Two-Column Layout -->
+        <div class="content-wrapper">
+
+            <!-- Left Column: Editorial & Websites -->
+            <div class="main-column">
+
+                <!-- Editorial Section -->
+                <div class="editorial">
+                    <h2>Editorial</h2>
+                    <p>Welcome to our latest edition of EduConnect! The advent of advanced digital tools in the modern
+                        classroom has caused a massive shift in how we approach teaching. It is no longer just about
+                        using technology; it is about <strong>Digital Pedagogy</strong>—the thoughtful, critical
+                        integration of these platforms to enhance and transform the learning experience. As educators,
+                        our current landscape demands flexibility, creativity, and a keen understanding of both physical
+                        and virtual learning spaces. This transition empowers us to reach students with diverse needs,
+                        personalize their educational journeys, and foster critical digital literacy skills essential
+                        for their futures.</p>
+                </div>
+
+                <!-- 10 Verified Websites Section -->
+                <div class="verified-websites">
+                    <h2>10 Verified Educational Websites</h2>
+                    <ul class="websites-list">
+                        <li>
+                            <h3><a href="https://diksha.gov.in" target="_blank" rel="noopener">1. DIKSHA</a></h3>
+                            <p>India's national teacher and student portal offering curriculum-aligned e-content, video
+                                lessons, and digital textbooks.</p>
+                        </li>
+                        <li>
+                            <h3><a href="https://swayam.gov.in" target="_blank" rel="noopener">2. SWAYAM</a></h3>
+                            <p>Government of India MOOC platform. Excellent for independent student enrichment and
+                                teacher professional development.</p>
+                        </li>
+                        <li>
+                            <h3><a href="https://www.khanacademy.org" target="_blank" rel="noopener">3. Khan Academy</a>
+                            </h3>
+                            <p>Provides interactive exercises for maths and science with a personalized learning
+                                dashboard to track student mastery.</p>
+                        </li>
+                        <li>
+                            <h3><a href="https://www.oercommons.org" target="_blank" rel="noopener">4. OER Commons</a>
+                            </h3>
+                            <p>A comprehensive public digital library of open educational resources, allowing educators
+                                to remix and share lesson plans globally.</p>
+                        </li>
+                        <li>
+                            <h3><a href="https://quizizz.com" target="_blank" rel="noopener">5. Quizizz</a></h3>
+                            <p>A game-based learning platform perfect for highly engaging formative assessments with
+                                real-time class reports.</p>
+                        </li>
+                        <li>
+                            <h3><a href="https://epathshala.nic.in" target="_blank" rel="noopener">6. e-Pathshala</a>
+                            </h3>
+                            <p>A joint initiative by NCERT and MOE, hosting essential digital textbooks and
+                                supplementary audio/video material.</p>
+                        </li>
+                        <li>
+                            <h3><a href="https://phet.colorado.edu" target="_blank" rel="noopener">7. PhET Interactive
+                                    Simulations</a></h3>
+                            <p>Research-based, offline-capable science and mathematics simulations developed by the
+                                University of Colorado Boulder.</p>
+                        </li>
+                        <li>
+                            <h3><a href="https://artsandculture.google.com/edu" target="_blank" rel="noopener">8. Google
+                                    Arts & Culture</a></h3>
+                            <p>Provides rich virtual museum tours and high-resolution artworks. An incredible resource
+                                for history and geography projects.</p>
+                        </li>
+                        <li>
+                            <h3><a href="https://ndl.iitkgp.ac.in" target="_blank" rel="noopener">9. National Digital
+                                    Library (NDL)</a></h3>
+                            <p>A massive aggregator of books and academic journals hosted by IIT Kharagpur, supporting
+                                advanced research.</p>
+                        </li>
+                        <li>
+                            <h3><a href="https://www.socrative.com" target="_blank" rel="noopener">10. Socrative</a>
+                            </h3>
+                            <p>An easy-to-use classroom tool to instantly assess student understanding via on-the-fly
+                                quizzes and exit tickets.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Right Column: Sidebar (Teacher's Corner) -->
+            <div class="sidebar">
+                <h2>Teacher's Corner</h2>
+
+                <div class="tip-card">
+                    <h4>⏱️ Tip #1: The 10-Minute Rule</h4>
+                    <p>Attention spans in digital environments are fleeting. Break your online lecture into 10-minute
+                        chunks followed immediately by a quick interactive poll.</p>
+                </div>
+
+                <div class="tip-card">
+                    <h4>🤝 Tip #2: Peer Digital Review</h4>
+                    <p>Assign students to review each other's work via collaborative cloud documents. It builds teamwork
+                        skills and significantly reduces grading time.</p>
+                </div>
+
+                <div class="tip-card">
+                    <h4>🛡️ Tip #3: Cyber Check-ins</h4>
+                    <p>Remind students of digital etiquette at the start of every virtual lesson. Establishing rules
+                        early creates a dramatically safer learning environment.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>SPPU B.Ed. Practical Assignment • Course 207: Application of ICT • February 2026</p>
+        </footer>
+
+    </div>
+
+</body>
+
+</html>
