@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="mr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>एज्यु-कनेक्ट: द इंटरएक्टिव्ह एडिशन</title>
+    <!-- Modern Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- FontAwesome for professional symbols -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Beautiful, Modern Custom Variables */
+        :root {
+            /* Light Theme */
+            --primary: #0047AB;
+            --primary-dark: #002D6B;
+            --secondary: #00D4FF;
+            --bg-color: #F0F4F8;
+            --container-bg: rgba(255, 255, 255, 0.95);
+            --text-dark: #1E293B;
+            --text-muted: #64748B;
+            --border-color: #E2E8F0;
+            --card-hover-bg: #FFFFFF;
+            --shadow-color: rgba(15, 23, 42, 0.08);
+            --gradient-header: linear-gradient(135deg, #002D6B, #0047AB);
+        }
+
+        /* Dark Theme Variables */
+        [data-theme="dark"] {
+            --primary: #38BDF8;
+            --primary-dark: #0EA5E9;
+            --secondary: #00D4FF;
+            --bg-color: #0F172A;
+            --container-bg: rgba(30, 41, 59, 0.95);
+            --text-dark: #F8FAFC;
+            --text-muted: #94A3B8;
+            --border-color: #334155;
+            --card-hover-bg: #1E293B;
+            --shadow-color: rgba(0, 0, 0, 0.4);
+            --gradient-header: linear-gradient(135deg, #0F172A, #1E293B);
+        }
+
+        /* Essential Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.7;
+            padding: 2rem;
+            background-image: radial-gradient(circle at 10% 20%, rgba(0, 212, 255, 0.05) 0%, transparent 40%),
+                              radial-gradient(circle at 90% 80%, rgba(0, 71, 171, 0.05) 0%, transparent 40%);
+        }
+
+        /* Glassmorphism Container */
+        .newsletter-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: var(--container-bg);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            animation: slideUpFade 0.8s ease-out;
+        }
+
+        /* Header Layout */
+        header {
+            background: var(--gradient-header);
+            color: #FFFFFF;
+            padding: 3.5rem 2rem;
+            text-align: center;
+            border-bottom: 4px solid var(--secondary);
+            position: relative;
+        }
+
+        header h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        header p {
+            font-size: 1.25rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 30px;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .theme-toggle-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        /* Primary Content Grid Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            padding: 3.5rem;
+        }
+
+        @media (max-width: 850px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+                padding: 2rem;
+            }
+        }
+
+        /* Typography Subheadings */
+        h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.7rem;
+            color: var(--primary);
+            border-bottom: 3px solid var(--secondary);
+            display: inline-block;
+            padding-bottom: 0.4rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Interactive Editorial */
+        .editorial p {
+            color: var(--text-muted);
+            text-align: justify;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .highlight {
+            color: var(--primary);
+            font-weight: 600;
+            position: relative;
+        }
+        
+        .highlight::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 30%;
+            bottom: 0;
+            left: 0;
+            background: var(--secondary);
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        /* Featured Tool Interactive Box */
+        .featured-tool {
+            background: linear-gradient(to right, var(--card-hover-bg), var(--bg-color));
+            border-left: 5px solid var(--secondary);
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2.5rem 0;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            transition: transform 0.3s ease;
+        }
+        
+        .featured-tool:hover {
+            transform: translateY(-5px);
+        }
+
+        .featured-tool h3 {
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .featured-tool .tool-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .featured-tool .tool-btn:hover {
+            background: var(--secondary);
+            color: #000;
+            box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
+        }
+
+        /* Interactive Websites List */
+        .websites-list {
+            list-style: none;
+            display: grid;
+            gap: 1.2rem;
+        }
+
+        .websites-list li {
+            background-color: var(--card-hover-bg);
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .websites-list li::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .websites-list li:hover {
+            transform: translateX(8px) translateY(-2px);
+            box-shadow: 0 10px 25px var(--shadow-color);
+            border-color: transparent;
+        }
+        
+        .websites-list li:hover::before {
+            width: 8px;
+            background-color: var(--secondary);
+        }
+
+        .icon-circle {
+            background: rgba(0, 171, 255, 0.1);
+            color: var(--primary);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.2rem;
+            transition: transform 0.4s ease;
+        }
+
+        .websites-list li:hover .icon-circle {
+            transform: rotate(360deg);
+            background: var(--primary);
+            color: white;
+        }
+
+        .list-content h3 {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-bottom: 0.3rem;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .list-content h3 a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .list-content h3 a:hover {
+            color: var(--primary);
+        }
+
+        .list-content p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* Interactive Sidebar Accordion and Cards */
+        .sidebar {
+            background-color: var(--primary-dark);
+            color: #FFFFFF;
+            padding: 2.5rem 2rem;
+            border-radius: 12px;
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+        }
+
+        .sidebar h2 {
+            color: var(--secondary);
+            border-bottom-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .tip-card {
+            background-color: rgba(255, 255, 255, 0.08);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .tip-card:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: scale(1.02);
+            border-color: var(--secondary);
+        }
+
+        .tip-card h4 {
+            font-size: 1.15rem;
+            margin-bottom: 0.8rem;
+            color: #FFFFFF;
+            font-family: 'Outfit', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tip-card h4 i {
+            color: var(--secondary);
+        }
+
+        .tip-card p {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--card-hover-bg);
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+        }
+
+        footer strong {
+            color: var(--primary);
+        }
+
+        /* Animations */
+        @keyframes slideUpFade {
+            0% {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+    </style>
+</head>
+
+<body>
+
+    <div class="newsletter-container">
+
+        <!-- Header Section with Theme Toggle -->
+        <header>
+            <button class="theme-toggle-btn" id="theme-toggle" onclick="toggleTheme()">
+                <i class="fas fa-moon"></i> डार्क मोड
+            </button>
+            <h1><i class="fas fa-graduation-cap"></i> एज्यु-कनेक्ट</h1>
+            <p>इंटरएक्टिव्ह डिजिटल पेडागॉजी एडिशन</p>
+        </header>
+
+        <!-- Main Body: Two-Column Layout -->
+        <div class="content-wrapper">
+
+            <!-- Left Column: Editorial & Websites -->
+            <div class="main-column">
+
+                <!-- Enhanced Editorial Section -->
+                <div class="editorial">
+                    <h2><i class="fas fa-newspaper"></i> संपादकीय</h2>
+                    <p>एज्यु-कनेक्टच्या इंटरएक्टिव्ह आवृत्तीत आपले स्वागत आहे! आधुनिक वर्गातील प्रगत डिजिटल साधनांशी जुळवून घेतल्याने एक मोठा बदल झाला आहे. हे केवळ तंत्रज्ञान वापरण्यापुरते मर्यादित राहिलेले नाही; यात <span class="highlight">डिजिटल पेडागॉजी</span>—म्हणजेच इंटरएक्टिव्ह प्लॅटफॉर्मचा विचारपूर्वक आणि गंभीर एकात्मतेचा समावेश आहे.</p>
+                    <p>शिक्षक म्हणून, आपल्यावर भौतिक आणि आभासी जागांमधील दुवा जोडण्याची जबाबदारी आहे. इंटरएक्टिव्ह शिकण्यासारख्या गोष्टी, वैविध्यपूर्ण क्विझ आणि इमर्सिव्ह व्हर्च्युअल टूर्स आपल्याला विविध गरजा असलेल्या विद्यार्थ्यांपर्यंत पोहोचण्यास सक्षम करतात आणि यातून २१ व्या शतकासाठी आवश्यक असलेली डिजिटल साक्षरता कौशल्ये जोपासली जातात.</p>
+                </div>
+
+                <!-- Featured Tool Section (New Content) -->
+                <div class="featured-tool">
+                    <h3><i class="fas fa-star" style="color:#F59E0B;"></i> टूल ऑफ द मंथ: कॅनव्हा फॉर एज्युकेशन</h3>
+                    <p>शिक्षकांसाठी प्रीमियम डिझाईन टूल्स पूर्णपणे विनामूल्य अनलॉक करा! विद्यार्थ्यांना एका सुरक्षित इकोसिस्टममध्ये व्यावसायिक इन्फोग्राफिक्स, कोलॅबोरेटिव्ह व्हाईटबोर्ड्स आणि व्हिडिओ प्रेझेंटेशन्स तयार करून त्यांच्या सर्जनशीलतेला चालना द्या.</p>
+                    <a href="https://www.canva.com/education/" target="_blank" class="tool-btn"><i class="fas fa-external-link-alt"></i> आत्ता कॅनव्हा वापरून पहा</a>
+                </div>
+
+                <!-- Interactive Websites List -->
+                <div class="verified-websites">
+                    <h2><i class="fas fa-globe"></i> आवश्यक प्लॅटफॉर्म्स</h2>
+                    <ul class="websites-list">
+                        <li>
+                            <div class="icon-circle"><i class="fas fa-book-open"></i></div>
+                            <div class="list-content">
+                                <h3><a href="https://diksha.gov.in" target="_blank">१. दीक्षा (DIKSHA)</a></h3>
+                                <p>शालेय अभ्यासक्रमावर आधारित ई-कंटेंट आणि क्यूआर (QR) इंटिग्रेशनसह डिजिटल पाठ्यपुस्तके उपलब्ध करून देणारे भारताचे राष्ट्रीय शिक्षक आणि विद्यार्थी पोर्टल.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="icon-circle"><i class="fas fa-laptop-code"></i></div>
+                            <div class="list-content">
+                                <h3><a href="https://swayam.gov.in" target="_blank">२. स्वयं (SWAYAM)</a></h3>
+                                <p>भारत सरकारचे MOOC प्लॅटफॉर्म. विद्यार्थ्यांच्या स्वतंत्र विकासासाठी आणि शिक्षकांच्या उच्च-स्तरीय प्रगतीसाठी उत्तम.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="icon-circle"><i class="fas fa-chart-line"></i></div>
+                            <div class="list-content">
+                                <h3><a href="https://www.khanacademy.org" target="_blank">३. खान अकॅडमी (Khan Academy)</a></h3>
+                                <p>गणित आणि विज्ञानासाठी गॅमिफाईड आणि पर्सनलाईज्ड विद्यार्थी डॅशबोर्डसह इंटरएक्टिव्ह सराव प्रदान करते.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="icon-circle"><i class="fas fa-gamepad"></i></div>
+                            <div class="list-content">
+                                <h3><a href="https://quizizz.com" target="_blank">४. क्विझिझ (Quizizz)</a></h3>
+                                <p>एक अत्यंत आकर्षक, गेम-आधारित फॉरमॅटिव्ह असेसमेंट टूल ज्यामध्ये क्लासच्या प्रगतीचे सविस्तर रिअल-टाइम रिपोर्ट्स मिळतात.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="icon-circle"><i class="fas fa-atom"></i></div>
+                            <div class="list-content">
+                                <h3><a href="https://phet.colorado.edu" target="_blank">५. फेट सिमुलेशन्स (PhET Simulations)</a></h3>
+                                <p>CU Boulder द्वारे विकसित केलेले संशोधन-आधारित, अत्यंत इंटरएक्टिव्ह विज्ञान आणि गणित सिमुलेशन्स.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Right Column: Sidebar (Teacher's Corner) -->
+            <div class="sidebar">
+                <h2><i class="fas fa-lightbulb"></i> प्रो टिप्स</h2>
+                
+                <!-- Interactive hovering cards -->
+                <div class="tip-card" title="तुमच्या कामात लागू करण्यासाठी क्लिक करा!">
+                    <h4><i class="fas fa-stopwatch"></i> १०-मिनिटांचा नियम</h4>
+                    <p>डिजिटल लक्ष कमी वेळ टिकते. लेक्चर्सला १०-मिनिटांच्या टप्प्यात विभागून त्यानंतर झटपट इंटरएक्टिव्ह पोल्स घेतल्यास विद्यार्थ्यांचा सहभाग टिकून राहील.</p>
+                </div>
+
+                <div class="tip-card" title="तुमच्या कामात लागू करण्यासाठी क्लिक करा!">
+                    <h4><i class="fas fa-users"></i> पीअर डिजिटल रिव्ह्यू</h4>
+                    <p>पीअर रिव्ह्यूसाठी कोलॅबोरेटिव्ह क्लाउड डॉक्युमेंट्स (जसे की Google Docs) वापरा. यामुळे टीमवर्क वाढते आणि ग्रेडिंगचा वेळ लक्षणीयरीत्या वाचतो.</p>
+                </div>
+
+                <div class="tip-card" title="तुमच्या कामात लागू करण्यासाठी क्लिक करा!">
+                    <h4><i class="fas fa-shield-alt"></i> सायबर चेक-इन्स</h4>
+                    <p>डिजिटल शिष्टाचाराचे नियम लवकर प्रस्थापित करा. क्लासच्या सुरुवातीला गोपनीयतेशी संबंधित छोट्या सूचना दिल्यास सुरक्षित वातावरण निर्माण होते.</p>
+                </div>
+
+                <div class="tip-card" title="तुमच्या कामात लागू करण्यासाठी क्लिक करा!">
+                    <h4><i class="fas fa-calendar-check"></i> वीकली प्लॅनर्स</h4>
+                    <p>सोमवारी डिजिटल हायपर-डॉक सिलॅबस पाठवा. विद्यार्थ्यांना लिंकचा आगाऊ अंदाज दिल्यास त्यांची चिंता कमी होते आणि त्यांना स्वतःच्या वेगाने शिकण्यास मदत होते.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p><strong>सावित्रीबाई फुले पुणे विद्यापीठ (SPPU) बी.एड. प्रॅक्टिकल असाईनमेंट</strong> <br> कोर्स २०७: आयसीटीचे उपयोजन (Application of ICT) • इंटरएक्टिव्ह न्यूजलेटर</p>
+        </footer>
+
+    </div>
+
+    <!-- Small script to handle the Dark Mode Interactivity -->
+    <script>
+        function toggleTheme() {
+            const body = document.documentElement;
+            const themeBtn = document.getElementById('theme-toggle');
+            
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                themeBtn.innerHTML = '<i class="fas fa-moon"></i> डार्क मोड';
+                themeBtn.style.color = "white";
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeBtn.innerHTML = '<i class="fas fa-sun"></i> लाईट मोड';
+                themeBtn.style.color = "#FFD700";
+            }
+        }
+    </script>
+
+</body>
+
+</html>
